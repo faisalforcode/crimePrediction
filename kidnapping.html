@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #98abc5;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot10 {
+    height: 25px;
+    width: 25px;
+    background-color: #98abc5;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot1 {
+    height: 25px;
+    width: 25px;
+    background-color: #8a89a6;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot2 {
+    height: 25px;
+    width: 25px;
+    background-color: #7b6888;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot3 {
+    height: 25px;
+    width: 25px;
+    background-color: #6b486b;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot4{
+    height: 25px;
+    width: 25px;
+    background-color: #a05d56;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot5 {
+    height: 25px;
+    width: 25px;
+    background-color: #d0743c;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot6 {
+    height: 25px;
+    width: 25px;
+    background-color: #ff8c00;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot7 {
+    height: 25px;
+    width: 25px;
+    background-color: #98abc5;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot8 {
+    height: 25px;
+    width: 25px;
+    background-color: #8a89a6;
+    border-radius: 100%;
+    display: inline-block;
+}
+.dot9 {
+    height: 25px;
+    width: 25px;
+    background-color: #7b6888;
+    border-radius: 100%;
+    display: inline-block;
+}
+
+.relative {
+  position: relative;
+  width: 800px;
+  height: 600px;
+}
+.absolute {
+  position: absolute;
+  top: 120px;
+  right: 0;
+  width: 400px;
+  height: 300px;
+}
+
+.arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
+</style>
+	<div id="svg-col"> 
+ 		<h1 align="center"><U> KIDNAPPING </U></h1>
+	</div>
+	
+<svg width="960" height="500"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+ 
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height"),
+    radius = Math.min(width, height) / 2,
+    g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+var color = d3.scaleOrdinal(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+var pie = d3.pie()
+    .sort(null)
+    .value(function(d) { return d.number; });
+
+var path = d3.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0);
+
+var label = d3.arc()
+    .outerRadius(radius - 30)
+    .innerRadius(radius - 30);
+
+d3.csv("kidnapping.csv", function(d) {
+  d.number = +d.number;
+  return d;
+}, function(error, data) {
+  if (error) throw error;
+
+  var arc = g.selectAll(".arc")
+    .data(pie(data))
+    .enter().append("g")
+      .attr("class", "arc");
+
+  arc.append("path")
+      .attr("d", path)
+      .attr("fill", function(d) { return color(d.data.location); });
+
+  arc.append("text")
+      .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
+      .attr("dy", "0.35em")
+      .text(function(d) { return d.data.location; });
+});
+
+</script>
+<div class = "absolute" style="text-align:left">
+  <table>
+  <tr>
+    <td class="dot10"></td>
+    <td>APARTMENT, 2</td> 
+  </tr>
+  <tr>
+       <td class="dot1"></td>
+		<td>ALLEY, 2</td>
+  </tr>
+    <tr>
+       <td class="dot2"></td>
+		<td>DEP STORE, 0</td>
+  </tr>
+    <tr>
+       <td class="dot3"></td>
+		<td>GAS STATION, 0</td>
+  </tr>
+    <tr>
+       <td class="dot4"></td>
+		<td>HOTEL/MOTEL , 0</td>
+  </tr>
+    <tr>
+       <td class="dot5"></td>
+		<td>PARKING LOT, 1</td>
+  </tr>
+     <tr>
+       <td class="dot6"></td>
+		<td>RESIDENCE, 9</td>
+  </tr>   <tr>
+       <td class="dot7"></td>
+		<td>STREET, 16</td>
+  </tr>
+      <td class="dot8"></td>
+    <td>VACANT LOT, 4</td> 
+  </tr>
+  <tr>
+       <td class="dot9"></td>
+		<td>PUB BULIDING 3</td>
+  </tr>
+
+
+</table> 
+</div>
+<div>
+<form>
+<input type="button" onclick="location.href='new2.html';" value="GO To Home" />
+</form>
+</div>
+
+</body>
+</html>
